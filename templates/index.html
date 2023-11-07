@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <!-- <link rel="stylesheet" href="/static/css/index.css"> -->
+    <style>
+        .c{
+            margin-top: 80px;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-light bg-light fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="/static/images/icons8-music-50.png" alt="" width="30" height="30"
+                    class="d-inline-block align-text-top">
+                Music Player
+            </a>
+
+            <nav class="navbar navbar-light bg-light">
+                <div class="container-fluid">
+                    <a class="navbar-brand">Hello dear</a>
+                    <form class="d-flex" method="get">
+                        {% csrf_token %}
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="abcd">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </nav>
+        </div>
+    </nav>
+
+
+    <div class="c">
+        
+    </div>
+
+    <div class="container " >   <!--mt-5 -->
+        {% for song in allsongs %}
+        <div class="card mb-3">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{song.songThumbnail.url}}" class="img-fluid rounded-start" alt="{{song.songName}}">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{song.songName}}</h5>
+                        <p class="card-text">from - {{song.album}}</p>
+                        <p class="card-text"><small class="text-muted">{{song.last_updated | timesince}}</small></p>
+                    </div>
+              
+                <div class="col-md-2 " >
+                    <div class="play-button d-flex h-100 p-4  justify-content-lg-center align-items-center">
+                        
+                        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>
+                            
+                        </svg>
+                    </div>
+                    <div class="audio-file">
+                        <audio  controls>
+                            <source src="{{song.song.url}}" type="audio/mpeg">
+                        </audio>
+                    </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- <div class="header">
+        <div class="logo">
+            <img src="/static/images/icons8-music-50.png" alt="Logo">
+        </div>
+        <nav class="navigation">
+            <ul>
+                <li><a href="#">Artist</a></li>
+                <li><a href="#">Love song</a></li>
+                <li><a href="#">Sad song</a></li>
+                <li><a href="#">Lofi</a></li>
+            </ul>
+        </nav>
+    </div>
+    <section>
+        <div class="box">
+
+        </div>
+    </section> -->
+    <!-- <div class="card bg-dark text-white">
+                <img src="..." class="card-img" alt="...">
+                <div class="card-img-overlay">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <p class="card-text">Last updated 3 mins ago</p>
+                </div>
+              </div>
+         -->
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
